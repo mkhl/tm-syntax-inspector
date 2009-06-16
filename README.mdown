@@ -1,0 +1,12 @@
+# Syntax Inspector Plugin for TextMate
+
+This is a reimplementation of the Syntax Inspector feature of [Espresso][] as
+a [TextMate][] plugin.
+
+## Installation
+
+Open the Xcode Project file and *Build*. The built plugin will automatically
+be installed in your TextMate Application Support folder.
+
+[espresso]: http://macrabbit.com/espresso
+[textmate]: http://macromates.com/
