@@ -137,7 +137,8 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
                   atOffset:(uint)offset
               inDictionary:(NSMutableDictionary *)dict
 {
-  [dict setObject:[NSValue valueWithRange:NSMakeRange(offset, [[node stringValue] length])] forKey:[node XPath]];
+  NSRange range = NSMakeRange(offset, [[node stringValue] length]);
+  [dict setObject:[NSValue valueWithRange:range] forKey:[node XPath]];
   uint currentOffset = offset;
   uint i, count = [node childCount];
   for (i = 0; i < count; i++) {
