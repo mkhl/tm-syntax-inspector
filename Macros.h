@@ -50,3 +50,7 @@ static inline void releaseObject(id *thing)
                             [obj release];\
                             obj = nil;\
                         } while(0)
+
+// Proper Key-Value Observer Usage
+// Source: http://www.dribin.org/dave/blog/archives/2008/09/24/proper_kvo_usage/
+#define KVO_Context(_X_) static NSString *const _X_ = @#_X_

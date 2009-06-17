@@ -7,8 +7,8 @@
 #import "SIOutline.h"
 #import "Macros.h"
 
-static NSString *const SIDocumentChanged = @"SIDocumentChanged";
-static NSString *const SIPositionChanged = @"SIPositionChanged";
+KVO_Context(SIDocumentChanged);
+KVO_Context(SIPositionChanged);
 
 NSView <OakTextView> *SIMainTextView(void)
 {
