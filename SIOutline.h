@@ -5,13 +5,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "OakStatusBar.h"
 #import "OakTextView.h"
 
 @interface SIOutline : NSObject {
   IBOutlet NSTreeController *tree;
   IBOutlet NSOutlineView *view;
   IBOutlet NSWindow *window;
+  // TextMate UI Elements
   NSView <OakTextView> *textView;
+  NSView <OakStatusBar> *statusBar;
   // The XML representation of the current Document
   NSXMLDocument *xml_;
   // Range of each Scope (identified by XPath)

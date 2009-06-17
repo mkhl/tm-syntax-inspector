@@ -19,6 +19,14 @@ NSView <OakTextView> *SIMainTextView(void)
   return nil;
 }
 
+NSView <OakStatusBar> *SIMainStatusBar(void)
+{
+  id view = [[[NSApp mainWindow] windowController] valueForKey:@"statusBar"];
+  if ([view isKindOfClass:NSClassFromString(@"OakStatusBar")])
+    return (NSView <OakStatusBar> *)view;
+  return nil;
+}
+
 #pragma mark -
 @implementation SIOutline
 

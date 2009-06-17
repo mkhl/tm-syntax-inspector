@@ -27,6 +27,7 @@
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		D40C6DCC0FE1345E00B73065 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		D40C6DCD0FE1345E00B73065 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		D41BCFD40FE7DD680081D81E /* OakStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OakStatusBar.h; sourceTree = "<group>"; };
 		D46C4BC00FE79FD700AFDC37 /* SyntaxInspector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyntaxInspector.xib; sourceTree = "<group>"; };
 		D49C2DC00FE3D78C002F95D0 /* SIWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIWindowController.h; sourceTree = "<group>"; };
 		D49C2DC10FE3D78C002F95D0 /* SIWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIWindowController.m; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D41BCFD40FE7DD680081D81E /* OakStatusBar.h */,
 				D49C2DF70FE3F1BF002F95D0 /* OakTextView.h */,
 				D49C2DD00FE3DA87002F95D0 /* SIOutline.h */,
 				D49C2DD10FE3DA87002F95D0 /* SIOutline.m */,
