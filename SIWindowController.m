@@ -13,12 +13,6 @@ NSMenu *SIWindowMenu(void)
   return [[[NSApp mainMenu] itemWithTitle:@"Window"] submenu];
 }
 
-NSString *SINibPath(id self)
-{
-  return [[NSBundle bundleForClass:[self class]]
-          pathForResource:@"SyntaxInspector" ofType:@"nib"];
-}
-
 NSMenuItem *SICreateMenuItem(id self)
 {
   NSMenuItem *item;
@@ -36,7 +30,7 @@ NSMenuItem *SICreateMenuItem(id self)
 - (id)initWithPlugInController:(id <TMPlugInController>)controller
 {
   SIOutline *it = [[[SIOutline alloc] init] autorelease];
-	self = [super initWithWindowNibPath:SINibPath(self) owner:it];
+	self = [super initWithWindowNibName:@"SyntaxInspector" owner:it];
   if (!self)
     return nil;
   outline = [it retain];
