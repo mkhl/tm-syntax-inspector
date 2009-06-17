@@ -52,17 +52,11 @@ NSMenuItem *SICreateMenuItem(id self)
   NSMenu *windowMenu = SIWindowMenu();
   if (windowMenu) {
     NSArray *items = [windowMenu itemArray];
-    uint index, separators, count = [items count];
-    for (index = 0, separators = 0; index < count; index++) {
-      if ([[items objectAtIndex:index] isSeparatorItem]) {
+    uint separators, i, count = [items count];
+    for (separators = 0, i = 0; (separators < 2) && (i < count); i++)
+      if ([[items objectAtIndex:i] isSeparatorItem])
         separators++;
-        if (separators == 2) {
-          [windowMenu insertItem:menuItem atIndex:index-1];
-          return;
-        }
-      }
-    }
-    [windowMenu insertItem:menuItem atIndex:0];
+    [windowMenu insertItem:menuItem atIndex:(separators < 2 ? 0 : i - 1)];
   }
 }
 
