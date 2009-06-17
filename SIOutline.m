@@ -7,9 +7,8 @@
 #import "SIOutline.h"
 #import "Macros.h"
 
-static NSString *const SIXMLChanged = @"SIXMLChanged";
-static NSString *const SIMainWindowChanged = @"SIMainWindowChanged";
-static NSString *const SISelectedRangeChanged = @"SISelectedRangeChanged";
+static NSString *const SIDocumentChanged = @"SIDocumentChanged";
+static NSString *const SIPositionChanged = @"SIPositionChanged";
 
 NSView <OakTextView> *SIMainTextView(void)
 {
@@ -77,18 +76,18 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
              selector:@selector(outlineViewSelectionDidChange:)
                  name:NSOutlineViewSelectionDidChangeNotification
                object:view];
-//  [NSApp addObserver:self
-//          forKeyPath:@"mainWindow"
-//             options:0
-//             context:SIMainWindowChanged];
   [NSApp addObserver:self
-          forKeyPath:@"mainWindow.windowController.textView.xmlRepresentation"
+          forKeyPath:@"mainWindow.windowController.textView.document"
              options:0
-             context:SIXMLChanged];
-  //  [NSApp addObserver:self
-//          forKeyPath:@"mainWindow.initialFirstResponder.selectedRange"
-//             options:0
-//             context:SISelectedRangeChanged];
+             context:SIDocumentChanged];
+  [NSApp addObserver:self
+          forKeyPath:@"mainWindow.windowController.statusBar.lineNumber"
+             options:0
+             context:SIPositionChanged];
+  [NSApp addObserver:self
+          forKeyPath:@"mainWindow.windowController.statusBar.columnNumber"
+             options:0
+             context:SIPositionChanged];
 }
 
 - (void)dealloc
@@ -196,7 +195,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 }
 
 #pragma mark OakTextView Notifications
-- (void)textViewSelectionDidChange
+- (void)textViewSelectionDidChange:(NSNotification *)notification
 {
   if (textView) {
     NSLog(@"%@: Selection Changed: %@", self, NSStringFromRange([textView selectedRange]));
@@ -209,14 +208,13 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-  if (context == SIMainWindowChanged) {
+  if (context == SIDocumentChanged) {
     [self update];
-  } else if (context == SIXMLChanged) {
-    [self update];
-  } else if (context == SISelectedRangeChanged) {
-    [self textViewSelectionDidChange];
+  } else if (context == SIPositionChanged) {
+    [self textViewSelectionDidChange:nil];
   }
 }
+
 #pragma mark -
 #pragma mark OakTextView Interaction
 - (NSArray *)coordinatesForOffset:(uint)offset
