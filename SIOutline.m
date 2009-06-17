@@ -266,6 +266,11 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     [self update];
   } else if (context == SIPositionChanged) {
     [self textViewSelectionDidChange:nil];
+  } else {
+    [super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
   }
 }
 
