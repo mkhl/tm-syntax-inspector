@@ -121,7 +121,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 {
   if ([self xml]) {
     NSMutableArray *offsets = [NSMutableArray array];
-    NSArray *lines =  [[[[self xml] rootElement] stringValue] componentsSeparatedByString:@"\n"];
+    NSArray *lines =  [[[self xml] stringValue] componentsSeparatedByString:@"\n"];
     uint offset = 0;
     uint i, count = [lines count];
     for (i = 0; i < count; i++) {
