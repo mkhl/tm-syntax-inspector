@@ -181,7 +181,10 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     NSArray *nodes = [[self xml] nodesForXPath:@"//text()" error:nil];
     uint i, count = [nodes count];
     for (i = 0; i < count; i++) {
-      [[nodes objectAtIndex:i] detach];
+      NSXMLNode *node = [nodes objectAtIndex:i];
+      NSIndexPath *path = [self indexPathForNode:node];
+      [tree removeObjectAtArrangedObjectIndexPath:path];
+      [node detach];
     }
   }
 }
