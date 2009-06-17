@@ -46,4 +46,7 @@
 - (NSArray *)coordinatesForOffset:(uint)offset;
 - (void)selectRange:(NSRange)range;
 
+- (NSXMLNode *)nodeForOffset:(uint)offset;
+- (NSIndexPath *)indexPathForNode:(NSXMLNode *)node;
+
 @end

@@ -68,6 +68,18 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
   return lineOffsets_;
 }
 
+#pragma mark Convenience Accessors
+- (NSRange)rangeForNode:(NSXMLNode *)node
+{
+  return [[[self scopeRanges] objectForKey:[node XPath]] rangeValue];
+}
+
+- (uint)offsetForLine:(uint)line column:(uint)column
+{
+  return [[[self lineOffsets] objectAtIndex:line] unsignedIntValue] + column;
+}
+
+#pragma mark -
 #pragma mark Memory Management
 - (void)awakeFromNib
 {
@@ -217,7 +229,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 }
 
 #pragma mark -
-#pragma mark OakTextView Interaction
+#pragma mark OakTextView Selection
 - (NSArray *)coordinatesForOffset:(uint)offset
 {
   uint i, count = [[self lineOffsets] count];
@@ -243,6 +255,30 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     [textView selectToLine:[to objectAtIndex:0]
                  andColumn:[to objectAtIndex:1]];
   }
+}
+
+#pragma mark -
+#pragma mark NSOutlineView Selection
+- (NSXMLNode *)nodeForOffset:(uint)offset belowNode:(NSXMLNode *)node
+{
+  NSRange range = [self rangeForNode:node];
+  uint from = range.location;
+  uint to = range.location + range.length;
+  if ((from > offset) || (to < offset))
+    return nil;
+  uint i, count = [node childCount];
+  for (i = 0; i < count; i++) {
+    NSXMLNode *child = [node childAtIndex:i];
+    NSXMLNode *match = [self nodeForOffset:offset belowNode:child];
+    if (match)
+      return match;
+  }
+  return node;
+}
+
+- (NSXMLNode *)nodeForOffset:(uint)offset
+{
+  return [self nodeForOffset:offset belowNode:[[self xml] rootElement]];
 }
 
 #pragma mark -
