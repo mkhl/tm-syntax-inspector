@@ -197,8 +197,8 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     [parser setDelegate:self];
     BOOL ok = [parser parse];
     if (!ok) {
-      NSLog(@"%@: Failed to parse XML Representation: %@",
-            self, [parser parserError]);
+      DebugLog(@"Failed to parse XML Representation: %@",
+               [parser parserError]);
     }
     lastXMLHash_ = [xmlString hash];
   }
