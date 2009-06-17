@@ -268,7 +268,6 @@ didStartElement:(NSString *)elementName
     attributes:(NSDictionary *)attributeDict
 {
   NSXMLElement *element = [NSXMLElement elementWithName:elementName];
-  [element setAttributesAsDictionary:attributeDict];
   if (!rootElement_) {
     currentElement_ = rootElement_ = element;
   } else {
