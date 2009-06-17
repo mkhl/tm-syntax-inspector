@@ -213,7 +213,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     [idxs addObject:[NSNumber numberWithUnsignedInt:[currentNode index]]];
     currentNode = [currentNode parent];
   }
-  NSIndexPath *path = [NSIndexPath new];
+  NSIndexPath *path = [[NSIndexPath new] autorelease];
   while ([idxs count] > 0) {
     path = [path indexPathByAddingIndex:[[idxs lastObject] unsignedIntValue]];
     [idxs removeLastObject];
