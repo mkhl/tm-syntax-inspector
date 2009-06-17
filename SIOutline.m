@@ -378,4 +378,25 @@ foundIgnorableWhitespace:(NSString *)string
   [currentElement_ addChild:[NSXMLNode textWithStringValue:string]];
 }
 
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+  switch ([parseError code]) {
+    case NSXMLParserDelegateAbortedParseError:
+      // We aborted because of an error. Ignore this second notification.
+      break;
+    default:
+      // There was an error parsing the XML.
+      // We probably can't recover, and we log the error elsewhere,
+      // so we'll just clean up after the parser right now.
+      [parser abortParsing];
+      currentElement_ = nil;
+      rootElement_ = nil;
+      // Construct an empty XML tree to hack an Error message into the view.
+      [self setXml:[[[NSXMLDocument alloc]
+                     initWithRootElement:[NSXMLElement elementWithName:@""]]
+                    autorelease]];
+      break;
+  }
+}
+
 @end
