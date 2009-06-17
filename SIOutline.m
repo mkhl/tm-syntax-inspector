@@ -114,17 +114,20 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 #pragma mark Entry Point
 - (void)update
 {
+  updating_ = YES;
+  statusBar = SIMainStatusBar();
   textView = SIMainTextView();
   if (textView) {
     if ([window isVisible]) {
-      updating_ = YES;
-      [self updateXML];
-      [self updateScopes];
-      [self updateLines];
-      [self filterXML];
-      updating_ = NO;
+      if ([[textView xmlRepresentation] hash] != lastXMLHash_) {
+        [self updateXML];
+        [self updateScopes];
+        [self updateLines];
+        [self filterXML];
+      }
     }
   }
+  updating_ = NO;
 }
 
 #pragma mark -
@@ -186,14 +189,33 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 - (void)updateXML
 {
   if (textView) {
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[[textView xmlRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *xmlString = [textView xmlRepresentation];
+    NSXMLParser *parser = [[[NSXMLParser alloc] initWithData:[xmlString dataUsingEncoding:NSUTF8StringEncoding]] autorelease];
     [parser setDelegate:self];
     BOOL ok = [parser parse];
     if (!ok) {
-      NSLog(@"%@: Failed to parse XML Representation: %@", self, [parser parserError]);
+      NSLog(@"%@: Failed to parse XML Representation: %@",
+            self, [parser parserError]);
     }
-    [parser release];
+    lastXMLHash_ = [xmlString hash];
   }
+}
+
+#pragma mark NSTreeController Interaction
+- (NSIndexPath *)indexPathForNode:(NSXMLNode *)node
+{
+  NSMutableArray *idxs = [NSMutableArray array];
+  NSXMLNode *currentNode = node;
+  while ([currentNode parent]) {
+    [idxs addObject:[NSNumber numberWithUnsignedInt:[currentNode index]]];
+    currentNode = [currentNode parent];
+  }
+  NSIndexPath *path = [NSIndexPath new];
+  while ([idxs count] > 0) {
+    path = [path indexPathByAddingIndex:[[idxs lastObject] unsignedIntValue]];
+    [idxs removeLastObject];
+  }
+  return path;
 }
 
 #pragma mark -
@@ -201,17 +223,33 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
   if (!updating_) {
-    NSString *xpath = [[[tree selectedObjects] lastObject] XPath];
-    NSRange range = [[[self scopeRanges] objectForKey:xpath] rangeValue];
-    [self selectRange:range];
+    updating_ = YES;
+    if (textView) {
+      NSRange range = [self rangeForNode:[[tree selectedObjects] lastObject]];
+      [self selectRange:range];
+    }
+    updating_ = NO;
   }
 }
 
 #pragma mark OakTextView Notifications
 - (void)textViewSelectionDidChange:(NSNotification *)notification
 {
-  if (textView) {
-    NSLog(@"%@: Selection Changed: %@", self, NSStringFromRange([textView selectedRange]));
+  if (!updating_) {
+    updating_ = YES;
+    if (statusBar) {
+      uint line = [[statusBar valueForKey:@"lineNumber"] unsignedIntValue];
+      uint column = [[statusBar valueForKey:@"columnNumber"] unsignedIntValue];
+      if ((lastLineNumber_ != line) || (lastColumnNumber_ != column)) {
+        lastLineNumber_ = line;
+        lastColumnNumber_ = column;
+        uint offset = [self offsetForLine:line column:column];
+        NSXMLNode *node = [self nodeForOffset:offset];
+        NSIndexPath *path = [self indexPathForNode:node];
+        [tree setSelectionIndexPath:path];
+      }
+    }
+    updating_ = NO;
   }
 }
 

@@ -22,8 +22,12 @@
   // Character Offset of each Line
   NSArray *lineOffsets_;
  @private
-  // XML update in progress
+  // Update in progress; ignore XML and selection changes
   BOOL updating_;
+  // "Caches" for the last XML representation and caret position
+  uint lastXMLHash_;
+  uint lastLineNumber_;
+  uint lastColumnNumber_;
   // NSXMLParser State
   NSXMLElement *rootElement_;
   NSXMLElement *currentElement_;
