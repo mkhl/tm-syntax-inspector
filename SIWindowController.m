@@ -6,6 +6,7 @@
 
 #import "SIWindowController.h"
 #import "SIOutline.h"
+#import "Macros.h"
 
 #pragma mark Helper Functions
 NSMenu *SIWindowMenu(void)
@@ -42,7 +43,7 @@ NSMenuItem *SICreateMenuItem(id self)
 - (void)dealloc
 {
   [self uninstallMenuItem];
-  [menuItem release];
+  DESTROY(menuItem);
   [super dealloc];
 }
 
