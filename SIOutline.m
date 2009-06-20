@@ -37,9 +37,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 - (void)setXml:(NSXMLDocument *)newXml
 {
   [xml_ autorelease];
-  [self willChangeValueForKey:@"xml"];
   xml_ = [newXml retain];
-  [self didChangeValueForKey:@"xml"];
 }
 - (NSXMLDocument *)xml
 {
@@ -48,9 +46,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 - (void)setScopeRanges:(NSDictionary *)newScopes
 {
   [scopeRanges_ autorelease];
-  [self willChangeValueForKey:@"scopeRanges"];
   scopeRanges_ = [newScopes retain];
-  [self didChangeValueForKey:@"scopeRanges"];
 }
 - (NSDictionary *)scopeRanges
 {
@@ -59,9 +55,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 - (void)setLineOffsets:(NSArray *)newLines
 {
   [lineOffsets_ autorelease];
-  [self willChangeValueForKey:@"lineOffsets"];
   lineOffsets_ = [newLines retain];
-  [self didChangeValueForKey:@"lineOffsets"];
 }
 - (NSArray *)lineOffsets
 {
