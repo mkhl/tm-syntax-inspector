@@ -43,6 +43,7 @@ NSMenuItem *SICreateMenuItem(id self)
 - (void)dealloc
 {
   [self uninstallMenuItem];
+  DESTROY(outline);
   DESTROY(menuItem);
   [super dealloc];
 }
