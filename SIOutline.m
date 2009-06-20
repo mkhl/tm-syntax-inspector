@@ -119,7 +119,8 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
   textView = SIMainTextView();
   if (textView) {
     if ([window isVisible]) {
-      if ([[textView xmlRepresentation] hash] != lastXMLHash_) {
+      NSString *xmlString = [textView xmlRepresentation];
+      if (!isEmpty(xmlString) && [xmlString hash] != lastXMLHash_) {
         [self updateXML];
         [self updateScopes];
         [self updateLines];
