@@ -8,20 +8,13 @@
 #import "SIOutline.h"
 #import "Macros.h"
 
+#pragma mark Static Data
+static NSString *SIMenuItemTitle = @"Show Syntax Inspector";
+
 #pragma mark Helper Functions
 NSMenu *SIWindowMenu(void)
 {
   return [[[NSApp mainMenu] itemWithTitle:@"Window"] submenu];
-}
-
-NSMenuItem *SICreateMenuItem(id self)
-{
-  NSMenuItem *item;
-  item = [[[NSMenuItem alloc] initWithTitle:@"Show Syntax Inspector"
-                                     action:@selector(showWindow:)
-                              keyEquivalent:@""] autorelease];
-  [item setTarget:self];
-  return item;
 }
 
 #pragma mark -
@@ -35,7 +28,7 @@ NSMenuItem *SICreateMenuItem(id self)
   if (!self)
     return nil;
   outline = [it retain];
-  menuItem = [SICreateMenuItem(self) retain];
+  menuItem = [[self createMenuItem] retain];
   [self installMenuItem];
 	return self;
 }
@@ -49,6 +42,16 @@ NSMenuItem *SICreateMenuItem(id self)
 }
 
 #pragma mark Menu Item
+- (NSMenuItem *)createMenuItem
+{
+  NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:SIMenuItemTitle
+                                                 action:@selector(showWindow:)
+                                          keyEquivalent:@""]
+                      autorelease];
+  [item setTarget:self];
+  return item;
+}
+
 - (void)installMenuItem
 {
   NSMenu *windowMenu = SIWindowMenu();

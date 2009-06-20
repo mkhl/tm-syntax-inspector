@@ -16,6 +16,7 @@
 
 - (id)initWithPlugInController:(id <TMPlugInController>)controller;
 
+- (NSMenuItem *)createMenuItem;
 - (void)installMenuItem;
 - (void)uninstallMenuItem;
 
