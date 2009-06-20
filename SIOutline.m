@@ -125,6 +125,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
         [self updateScopes];
         [self updateLines];
         [self filterXML];
+        [tree setContent:[[self xml] rootElement]];
       }
     }
   }
@@ -184,10 +185,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     NSArray *nodes = [[self xml] nodesForXPath:@"//text()" error:nil];
     uint i, count = [nodes count];
     for (i = 0; i < count; i++) {
-      NSXMLNode *node = [nodes objectAtIndex:i];
-      NSIndexPath *path = [self indexPathForNode:node];
-      [tree removeObjectAtArrangedObjectIndexPath:path];
-      [node detach];
+      [[nodes objectAtIndex:i] detach];
     }
   }
 }
