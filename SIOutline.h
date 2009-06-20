@@ -44,7 +44,7 @@
 - (void)update;
 - (void)filterXML;
 - (void)updateXML;
-- (void)updateScopes;
+- (void)updateScopeRanges;
 - (void)updateLineOffsets;
 
 - (NSArray *)coordinatesForOffset:(uint)offset;

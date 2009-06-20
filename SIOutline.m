@@ -116,7 +116,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
       NSString *xmlString = [textView xmlRepresentation];
       if (!isEmpty(xmlString) && [xmlString hash] != lastXMLHash_) {
         [self updateXML];
-        [self updateScopes];
+        [self updateScopeRanges];
         [self updateLineOffsets];
         [self filterXML];
         [tree setContent:[[self xml] rootElement]];
@@ -144,9 +144,9 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 }
 
 #pragma mark Scope Ranges
-- (void)updateScopeForNode:(NSXMLNode *)node
-                  atOffset:(uint)offset
-              inDictionary:(NSMutableDictionary *)dict
+- (void)updateScopeRangeForNode:(NSXMLNode *)node
+                       atOffset:(uint)offset
+                   inDictionary:(NSMutableDictionary *)dict
 {
   if ([node kind] != NSXMLTextKind) {
     NSRange range = NSMakeRange(offset, [[node stringValue] length]);
@@ -155,19 +155,21 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
     uint i, count = [node childCount];
     for (i = 0; i < count; i++) {
       NSXMLNode *child = [node childAtIndex:i];
-      [self updateScopeForNode:child atOffset:currentOffset inDictionary:dict];
+      [self updateScopeRangeForNode:child
+                           atOffset:currentOffset
+                       inDictionary:dict];
       currentOffset += [[child stringValue] length];
     }
   }
 }
 
-- (void)updateScopes
+- (void)updateScopeRanges
 {
   if ([self xml]) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [self updateScopeForNode:[[self xml] rootElement]
-                    atOffset:0
-                inDictionary:dict];
+    [self updateScopeRangeForNode:[[self xml] rootElement]
+                         atOffset:0
+                     inDictionary:dict];
     [self setScopeRanges:dict]; 
   }
 }
