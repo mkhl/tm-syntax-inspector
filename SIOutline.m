@@ -153,14 +153,16 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
                   atOffset:(uint)offset
               inDictionary:(NSMutableDictionary *)dict
 {
-  NSRange range = NSMakeRange(offset, [[node stringValue] length]);
-  [dict setObject:[NSValue valueWithRange:range] forKey:[node XPath]];
-  uint currentOffset = offset;
-  uint i, count = [node childCount];
-  for (i = 0; i < count; i++) {
-    NSXMLNode *child = [node childAtIndex:i];
-    [self updateScopeForNode:child atOffset:currentOffset inDictionary:dict];
-    currentOffset += [[child stringValue] length];
+  if ([node kind] != NSXMLTextKind) {
+    NSRange range = NSMakeRange(offset, [[node stringValue] length]);
+    [dict setObject:[NSValue valueWithRange:range] forKey:[node XPath]];
+    uint currentOffset = offset;
+    uint i, count = [node childCount];
+    for (i = 0; i < count; i++) {
+      NSXMLNode *child = [node childAtIndex:i];
+      [self updateScopeForNode:child atOffset:currentOffset inDictionary:dict];
+      currentOffset += [[child stringValue] length];
+    }
   }
 }
 
