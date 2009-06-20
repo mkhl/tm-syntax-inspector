@@ -117,7 +117,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
       if (!isEmpty(xmlString) && [xmlString hash] != lastXMLHash_) {
         [self updateXML];
         [self updateScopes];
-        [self updateLines];
+        [self updateLineOffsets];
         [self filterXML];
         [tree setContent:[[self xml] rootElement]];
       }
@@ -128,7 +128,7 @@ NSView <OakStatusBar> *SIMainStatusBar(void)
 
 #pragma mark -
 #pragma mark Line Offsets
-- (void)updateLines
+- (void)updateLineOffsets
 {
   if ([self xml]) {
     NSMutableArray *offsets = [NSMutableArray array];
