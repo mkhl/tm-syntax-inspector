@@ -53,10 +53,9 @@ NSMenuItem *SICreateMenuItem(id self)
 {
   NSMenu *windowMenu = SIWindowMenu();
   if (windowMenu) {
-    NSArray *items = [windowMenu itemArray];
-    uint separators, i, count = [items count];
+    uint separators, i, count = [windowMenu numberOfItems];
     for (separators = 0, i = 0; (separators < 2) && (i < count); i++)
-      if ([[items objectAtIndex:i] isSeparatorItem])
+      if ([[windowMenu itemAtIndex:i] isSeparatorItem])
         separators++;
     [windowMenu insertItem:menuItem atIndex:(separators < 2 ? 0 : i - 1)];
   }
