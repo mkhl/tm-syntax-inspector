@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		D40C6DCE0FE1345E00B73065 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = D40C6DCD0FE1345E00B73065 /* JRSwizzle.m */; };
 		D46C4BC10FE79FD800AFDC37 /* SyntaxInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46C4BC00FE79FD700AFDC37 /* SyntaxInspector.xib */; };
 		D49C2DC20FE3D78C002F95D0 /* SIWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49C2DC10FE3D78C002F95D0 /* SIWindowController.m */; };
 		D49C2DD20FE3DA87002F95D0 /* SIOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = D49C2DD10FE3DA87002F95D0 /* SIOutline.m */; };
@@ -24,8 +23,6 @@
 		8D5B49B6048680CD000E48DA /* TMSyntaxInspector.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMSyntaxInspector.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		D40C6DCC0FE1345E00B73065 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
-		D40C6DCD0FE1345E00B73065 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		D41BCFD40FE7DD680081D81E /* OakStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OakStatusBar.h; sourceTree = "<group>"; };
 		D46C4BC00FE79FD700AFDC37 /* SyntaxInspector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyntaxInspector.xib; sourceTree = "<group>"; };
 		D49C2DC00FE3D78C002F95D0 /* SIWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIWindowController.h; sourceTree = "<group>"; };
@@ -124,8 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				D49C2DD60FE3DFDA002F95D0 /* Macros.h */,
-				D40C6DCC0FE1345E00B73065 /* JRSwizzle.h */,
-				D40C6DCD0FE1345E00B73065 /* JRSwizzle.m */,
 				32DBCF630370AF2F00C91783 /* TMSyntaxInspector_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -203,7 +198,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D40C6DCE0FE1345E00B73065 /* JRSwizzle.m in Sources */,
 				D49C2DC20FE3D78C002F95D0 /* SIWindowController.m in Sources */,
 				D49C2DD20FE3DA87002F95D0 /* SIOutline.m in Sources */,
 			);
