@@ -1,12 +1,45 @@
 # Syntax Inspector Plugin for TextMate
 
-This is a reimplementation of the Syntax Inspector feature of [Espresso][] as
-a [TextMate][] plugin.
+A Syntax Inspector for [TextMate][]. Reimplementation of the eponymous feature of [Espresso][].
 
-## Installation
+## But what does it _do_?
 
-Open the Xcode Project file and *Build*. The built plugin will automatically
-be installed in your TextMate Application Support folder.
+It displays an outline view of the tree of syntax scopes of the current
+TextMate document. Think of it as `⌃⇧P` on steroids. Lots of them.
+
+In addition, the selection of the outline and your document should sync, i.e.
+the scope of the word under the caret (in the document) will be selected in
+the outline, and selecting a scope in the outline will select the
+corresponding block in the document.
+
+## So what doesn’t it do?
+
+Known limitations include:
+
+* Changes to the document after it is loaded aren’t registered.
+  (This can be worked around by switching to another document, then switching back.)
+
+* Parsing large documents can be slow and stall TextMate a bit.
+
+* Some grammars fail to parse completely (including C++ and Objective-C++).
+
+## Alright, how do I use it?
+
+Just *build* (or `xcodebuild`) the contained Xcode Project file. The built
+plugin will automatically be installed in your TextMate Application Support
+folder.
+(Incidentally, I dislike plugins that auto-install on build, so this will
+probably change.)
+
+## Gah, I found a Nasty Bug!
+
+Good thing we have an issue tracker then: <http://github.com/mkhl/tm-syntax-inspector/issues>
+
+## Wow, your code sucks…
+
+Tell me about it. Any kind of feedback, including stylistic, is very welcome.
+My email address should be somewhere on this page: <http://github.com/mkhl>
+
 
 [espresso]: http://macrabbit.com/espresso
 [textmate]: http://macromates.com/
