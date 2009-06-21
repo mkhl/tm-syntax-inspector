@@ -80,13 +80,10 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D41BCFD40FE7DD680081D81E /* OakStatusBar.h */,
-				D49C2DF70FE3F1BF002F95D0 /* OakTextView.h */,
 				D49C2DD00FE3DA87002F95D0 /* SIOutline.h */,
 				D49C2DD10FE3DA87002F95D0 /* SIOutline.m */,
 				D49C2DC00FE3D78C002F95D0 /* SIWindowController.h */,
 				D49C2DC10FE3D78C002F95D0 /* SIWindowController.m */,
-				D49C2DC50FE3D7D4002F95D0 /* TMPluginController.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -121,6 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				D49C2DD60FE3DFDA002F95D0 /* Macros.h */,
+				D41BCFD40FE7DD680081D81E /* OakStatusBar.h */,
+				D49C2DF70FE3F1BF002F95D0 /* OakTextView.h */,
+				D49C2DC50FE3D7D4002F95D0 /* TMPluginController.h */,
 				32DBCF630370AF2F00C91783 /* TMSyntaxInspector_Prefix.pch */,
 			);
 			name = "Other Sources";
